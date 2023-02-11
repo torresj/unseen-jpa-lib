@@ -24,32 +24,10 @@ jobs:
           command: |
             echo 'export REVISION="${CIRCLE_BUILD_NUM}-$(echo -n $CIRCLE_SHA1 | tail -c 8)"' >> $BASH_ENV
             source $BASH_ENV
-      # Add github credentials to settings.xml
-      - run:
-          name: Set setting.xml
-          run: |
-            cat > ~/.m2/settings.xml << ENDOFFILE
-            <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-              http://maven.apache.org/xsd/settings-1.0.0.xsd">
-              <servers>
-                <server>
-                  <id>github</id>
-                  <username>${env.GITHUB_OWNER}</username>
-                  <password>${env.GITHUB_TOKEN}</password>
-                </server>
-              </servers>
-            </settings>
-            ENDOFFILE
       # Build
       - run:
           name: Build
           command: mvn -Drevision=$REVISION clean package
-      # Publish
-      - run:
-          name: Publish
-          command: mvn -Drevision=$REVISION deploy
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
