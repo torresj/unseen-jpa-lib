@@ -25,16 +25,13 @@ jobs:
             echo 'export REVISION="${CIRCLE_BUILD_NUM}-$(echo -n $CIRCLE_SHA1 | tail -c 8)"' >> $BASH_ENV
             source $BASH_ENV
       # Set settings.xml
-      - run: |
-          cat > foo.conf << EOF ' \
-          NameVirtualHost 127.0.0.1
-          
-          # Default
-          <VirtualHost 127.0.0.1>
-          ServerName localhost
-          DocumentRoot "C:/wamp/www"
-          </VirtualHost>
-          EOF'
+      - run:
+          command: |
+            cat text.txt \<< EOF
+            {
+            "registry-mirrors": ["https://mirror.gcr.io"]
+            }
+            EOF
       # Build
       - run:
           name: Build
