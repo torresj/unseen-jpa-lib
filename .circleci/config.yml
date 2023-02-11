@@ -27,7 +27,7 @@ jobs:
       # Build and deploy
       - run:
           name: Build and deploy
-          command: mvn -s ./settings.xml -Drevision=$REVISION package
+          command: mvn -s ./settings.xml -Drevision=$REVISION package deploy
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
