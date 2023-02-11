@@ -1,0 +1,60 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
+  publish:
+    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
+    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # Be sure to update the Docker image tag below to openjdk version of your application.
+    # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
+    docker:
+      - image: cimg/openjdk:17.0
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      # Create revision variable
+      - run:
+          name: Generate revision
+          command: |
+            echo 'export REVISION="${CIRCLE_BUILD_NUM}-$(echo -n $CIRCLE_SHA1 | tail -c 8)"' >> $BASH_ENV
+            source $BASH_ENV
+      # Add github credentials to settings.xml
+      - run:
+          name: Set setting.xml
+          command: |
+            cat > ~/.m2/settings.xml << ENDOFFILE
+            <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+              http://maven.apache.org/xsd/settings-1.0.0.xsd">
+              <servers>
+                <server>
+                  <id>github</id>
+                  <username>${env.GITHUB_OWNER}</username>
+                  <password>${env.GITHUB_TOKEN}</password>
+                </server>
+              </servers>
+            </settings>
+            ENDOFFILE
+      # Build
+      - run:
+          name: Build
+          command: mvn -Drevision=$REVISION clean package
+      # Publish
+      - run:
+          name: Publish
+          command: mvn -Drevision=$REVISION deploy
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  build_and_publish: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - publish
