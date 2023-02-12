@@ -1,4 +1,4 @@
-package com.torresj.unseen.entites;
+package com.torresj.unseen.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -14,28 +15,18 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class IterationEntity {
+public class GiftEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(updatable = false)
   private Long id;
 
-  @Column(updatable = false, nullable = false)
-  private Long groupId;
-
   @Column(updatable = false)
   @CreationTimestamp
   private LocalDateTime createAt;
 
-  @Column(nullable = false)
-  @CreationTimestamp
-  private LocalDateTime giftsDay;
+  @Column @UpdateTimestamp private LocalDateTime updateAt;
 
-  @Column private boolean closed;
-
-  @Column private boolean seePairs;
-
-  @Column private String budget;
-
-  @Column private String comments;
+  @Column(unique = true, nullable = false, updatable = false)
+  private String name;
 }

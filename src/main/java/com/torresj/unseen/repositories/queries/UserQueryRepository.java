@@ -1,8 +1,8 @@
 package com.torresj.unseen.repositories.queries;
 
-import com.torresj.unseen.entites.AuthProvider;
-import com.torresj.unseen.entites.Role;
-import com.torresj.unseen.entites.UserEntity;
+import com.torresj.unseen.entities.AuthProvider;
+import com.torresj.unseen.entities.Role;
+import com.torresj.unseen.entities.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;

@@ -1,6 +1,6 @@
 package com.torresj.unseen.repositories.queries;
 
-import com.torresj.unseen.entites.UserResetPasswordEntity;
+import com.torresj.unseen.entities.UserResetPasswordEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

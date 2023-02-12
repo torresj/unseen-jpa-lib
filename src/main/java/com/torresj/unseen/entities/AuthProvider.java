@@ -1,4 +1,4 @@
-package com.torresj.unseen.entites;
+package com.torresj.unseen.entities;
 
 public enum AuthProvider {
   UNSEEN,

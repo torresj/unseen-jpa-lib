@@ -1,6 +1,6 @@
 package com.torresj.unseen.repositories.queries;
 
-import com.torresj.unseen.entites.PairEntity;
+import com.torresj.unseen.entities.PairEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;

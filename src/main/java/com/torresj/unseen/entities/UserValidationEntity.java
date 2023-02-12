@@ -1,4 +1,4 @@
-package com.torresj.unseen.entites;
+package com.torresj.unseen.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class GroupEntity {
+public class UserValidationEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(updatable = false)
@@ -25,17 +24,12 @@ public class GroupEntity {
   @CreationTimestamp
   private LocalDateTime createAt;
 
-  @Column @UpdateTimestamp private LocalDateTime updateAt;
+  @Column(nullable = false, updatable = false)
+  private Long userId;
+
+  @Column(nullable = false, updatable = false)
+  private String token;
 
   @Column(nullable = false)
-  private String name;
-
-  @Column(nullable = false, updatable = true, unique = true)
-  private String code;
-
-  @Column(nullable = false)
-  private Long owner;
-
-  @Column(nullable = false)
-  private boolean completed;
+  private int attempts;
 }

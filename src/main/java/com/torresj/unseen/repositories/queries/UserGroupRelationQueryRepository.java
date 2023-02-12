@@ -1,6 +1,6 @@
 package com.torresj.unseen.repositories.queries;
 
-import com.torresj.unseen.entites.UserGroupRelationEntity;
+import com.torresj.unseen.entities.UserGroupRelationEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

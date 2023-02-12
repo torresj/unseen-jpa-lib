@@ -1,4 +1,4 @@
-package com.torresj.unseen.entites;
+package com.torresj.unseen.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,22 +14,28 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class UserValidationEntity {
+public class IterationEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(updatable = false)
   private Long id;
 
+  @Column(updatable = false, nullable = false)
+  private Long groupId;
+
   @Column(updatable = false)
   @CreationTimestamp
   private LocalDateTime createAt;
 
-  @Column(nullable = false, updatable = false)
-  private Long userId;
-
-  @Column(nullable = false, updatable = false)
-  private String token;
-
   @Column(nullable = false)
-  private int attempts;
+  @CreationTimestamp
+  private LocalDateTime giftsDay;
+
+  @Column private boolean closed;
+
+  @Column private boolean seePairs;
+
+  @Column private String budget;
+
+  @Column private String comments;
 }
