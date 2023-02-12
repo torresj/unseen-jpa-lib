@@ -1,4 +1,4 @@
-package com.torresj.unseen.entites.repositories.queries;
+package com.torresj.unseen.repositories.queries;
 
 import com.torresj.unseen.entites.IterationEntity;
 import org.springframework.data.domain.Page;
