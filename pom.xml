@@ -46,7 +46,7 @@
     <spring-data-jpa.version>3.0.1</spring-data-jpa.version>
     <jakarta.persistence-api.version>3.1.0</jakarta.persistence-api.version>
     <lombok.version>1.18.26</lombok.version>
-    <hibernate-core.version>6.1.7.Final</hibernate-core.version>
+    <hibernate-core.version>6.2.0.CR2</hibernate-core.version>
   </properties>
 
   <dependencies>
