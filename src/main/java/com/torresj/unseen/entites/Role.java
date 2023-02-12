@@ -1,4 +1,6 @@
 package com.torresj.unseen.entites;
 
-public class TestEntity {
+public enum Role {
+  USER,
+  ADMIN
 }
